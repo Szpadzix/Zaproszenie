@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moja strona</title>
+
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+        }
+
+        /* Rozmyte tło */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: -20px;
+
+            background-image: url("kapibara.jpg");
+            background-size: cover;
+            background-position: center;
+
+            filter: blur(8px);
+            transform: scale(1.05);
+
+            z-index: -1;
+        }
+
+        h1, p {
+            text-align: center;
+        }
+
+        /* Kontener na przyciski */
+        .przyciski {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Przyciski */
+        .przycisk {
+            width: 120px;
+            height: 60px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: 2px solid black;
+            cursor: pointer;
+            font-size: 20px;
+
+            transition: transform 0.2s;
+            background-color: white;
+        }
+
+        /* Wynik po kliknięciu TAK */
+        #wynik {
+            display: none;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Czy zechcesz towarzyszyć mi na weselu?</h1>
+	<h3></h3>
+
+    <div class="przyciski">
+
+        <div id="tak" class="przycisk" onclick="wybranoTak()">
+            Tak
+        </div>
+
+        <div id="nie" class="przycisk" onclick="zmniejszNie()">
+            Nie
+        </div>
+
+    </div>
+
+    <!-- To pojawi się po kliknięciu TAK -->
+    <div id="wynik">
+        <h1>Wiedziałem! 😎</h1>
+        <h3>Widzimy się 5 września</h3>
+    </div>
+
+
+    <script>
+        let skalaNie = 1;
+        let skalaTak = 1;
+
+        // Kliknięcie NIE
+        function zmniejszNie() {
+
+            skalaNie -= 0.1;
+            skalaTak += 0.1;
+
+            document.getElementById("nie").style.transform =
+                `scale(${skalaNie})`;
+
+            document.getElementById("tak").style.transform =
+                `scale(${skalaTak})`;
+        }
+
+
+        // Kliknięcie TAK
+        function wybranoTak() {
+
+            // Ukrywamy przyciski
+            document.querySelector(".przyciski").style.display = "none";
+
+            // Ukrywamy pytanie
+            document.querySelector("h1").style.display = "none";
+            document.querySelector("h3").style.display = "none";
+
+            // Pokazujemy wynik
+            document.getElementById("wynik").style.display = "block";
+        }
+    </script>
+
+</body>
+</html>
